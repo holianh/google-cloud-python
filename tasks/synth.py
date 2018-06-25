@@ -28,18 +28,7 @@ v2beta2_library = gapic.py_library(
     'tasks', 'v2beta2',
     config_path='artman_cloudtasks.yaml')
 
-s.copy(v2beta2_library)
-
-# Set Release Status
-release_status = 'Development Status :: 3 - Alpha'
-s.replace('setup.py',
-          '(release_status = )(.*)$',
-          f"\\1'{release_status}'")
-
-# Add Dependencies
-s.replace('setup.py',
-          'dependencies = \[\n*(^.*,\n)+',
-          "\\g<0>    'grpc-google-iam-v1<0.12dev,>=0.11.4',\n")
+s.copy(v2beta2_library, excludes=["setup.py"])
 
 # Correct Naming of package
 s.replace('**/*.rst',
